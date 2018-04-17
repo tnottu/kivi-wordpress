@@ -127,8 +127,12 @@
       if( $item['updatedate'] === $d ){
 		  
       }else {
-        $this->item_update_metadata( $post->ID, $item );
-		$this->item_update_content( $post->ID, $item ); // comment this line to disable automatic updates for post_content and post_title. 
+        // $this->item_update_metadata( $post->ID, $item );
+        // $this->item_update_content( $post->ID, $item ); // comment this line to disable automatic updates for post_content and post_title.
+
+        // Item updating doesn't always work reliably and some values do not get updated. Recreate items instead.
+        $this->item_delete( $post->ID );
+        $this->item_add( $item );
       }
     }
 
